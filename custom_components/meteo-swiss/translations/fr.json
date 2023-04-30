@@ -19,13 +19,13 @@
             "unknown": "Erreur inconnue : veuillez réessayer plus tard"
         },
         "error": {
-            "lat": "The supplied latitude does not fall between -90 y 90 degrees",
-            "lon": "The supplied latitude does not fall between -180 y 180 degrees",
+            "lat": "La latitude fournie n'est pas comprise entre -90 et 90 degrés.",
+            "lon": "La latitude fournie n'est pas comprise entre -180 et 180 degrés.",
             "invalid_station_name": "Nom de la station invalide; merci de vérifier sur: https://rudd-o.com/meteostations",
-            "invalid_postcode": "Code postale incorrecte; cette intégration ne fonctionne que pour de codes postaux suisse",
-            "forecast_name_empty": "Forecast name cannot be empty",
-            "empty_name": "The display name is empty",
-            "update_interval_too_low": "The update interval is too low.  Must be minimum 1 minute."
+            "invalid_postcode": "Code postale incorrect; cette intégration ne fonctionne que pour de codes postaux suisses",
+            "forecast_name_empty": "Le nom de la prévision ne peut être vide",
+            "empty_name": "Le nom d'affichage est vide",
+            "update_interval_too_low": "L'intervalle de mise à jour est trop court. Il doit être d'au moins 1 minute."
         },
         "step": {
             "user": {
@@ -33,25 +33,25 @@
                     "latitude": "Latitude",
                     "longitude": "Longitude"
                 },
-                "description": "Confirm your geographical position.  This will be used to guess the closest real-time weather station and approximate your postal code for forecasts.",
-                "title": "Location"
+                "description": "Confirmez votre position géographique.  Celle-ci sera utilisée pour déterminer la station météorologique en temps réel la plus proche et le code postal approximatif pour les prévisions.",
+                "title": "Localisation"
             },
             "user_two": {
                 "data": {
-                    "postcode": "Postal code",
-                    "forecast_name": "Forecast (weather) entity name",
+                    "postcode": "Code postal",
+                    "forecast_name": "Nom de l'entité des prévisions (entity name)",
                     "update_interval": "Intervalle de mise à jour en minutes"
                 },
-                "description": "The postal code is used to look up the 5-day forecast.  The name you enter here will be used for the forecast (weather) entity.",
-                "title": "Forecast"
+                "description": "Le code postal est utilisé pour consulter les prévisions à 5 jours.  Le nom que vous saisissez ici sera utilisé pour l'entité de prévisions.",
+                "title": "Prévisions"
             },
             "user_three": {
                 "data": {
                     "station": "Station météo en temps réel",
-                    "real_time_name": "Real-time entity names"
+                    "real_time_name": "Noms des entités en temps réel"
                 },
-                "description": "The real-time weather station is used to look up the current weather at the station and provide them as sensors.  Selecting the first option of the list disables real-time weather sensors.\n\nIf a weather station is selected, the real-time entity names field is used to name the real-time (sensor) entities.  If no station is chosen, the real-time entity names field is ignored.\n\nhttps://rudd-o.com/meteostations lists the available real-time weather stations.",
-                "title": "Real-time weather"
+                "description": "La station météorologique en temps réel est utilisée pour consulter les conditions météorologiques actuelles de la station et les fournir en tant que capteur.  La sélection de la première option de la liste désactive les capteurs en temps réel. \n- Si une station météorologique est sélectionnée, le champ des noms d'entités en temps réel est utilisé pour nommer les entités en temps réel (capteurs).  Si aucune station n'est choisie, le champ des noms des entités en temps réel est ignoré.\n- https://rudd-o.com/meteostations dresse la liste des stations météorologiques en temps réel disponibles.",
+                "title": "Météo en temps réel"
             }
         }
     }
