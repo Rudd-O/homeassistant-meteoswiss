@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from enum import StrEnum
 
+from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import (
     CONF_NAME,
     DEGREE,
@@ -13,10 +14,12 @@ from homeassistant.const import (
     UnitOfSpeed,
     UnitOfTemperature,
     UnitOfTime,
+    UnitOfVolumetricFlux,
 )
 
 DOMAIN = "meteoswiss"
-CONF_NAME = CONF_NAME
+
+# Konfigurations-Schlüssel
 CONF_PRECIPITATION_NAME = "precipitation_name"
 CONF_FORECAST_NAME = "forecast_name"
 CONF_POSTCODE = "postcode"
@@ -30,11 +33,10 @@ CONF_LAT = "latitude"
 CONF_LON = "longitude"
 
 DEFAULT_UPDATE_INTERVAL = 5
-
 USER_AGENT = "MeteoSwiss Home Assistant integration"
 
-
 class Condition(StrEnum):
+    """Wetterzustände für Home Assistant."""
     partly_cloudy = "partlycloudy"
     clear_night = "clear-night"
     cloudy = "cloudy"
@@ -51,21 +53,14 @@ class Condition(StrEnum):
     windy = "windy"
     windy_variant = "windy-variant"
 
-
-# Mapping for conditions vs icon ID of meteoswiss
-# ID < 100 for day icons
-# ID > 100 for night icons
-# MeteoSwiss has more lvl for cloudy an rainy than home assistant
-# https://www.meteoswiss.admin.ch/dam/jcr:bfcea855-ab6b-4602-9d8b-0464afa30e66/2022-02-14-Wetter-Icons-inkl-beschreibung-v1-an-website.xlsx
-# Dump from the spreadsheet linked above on August 23 2024.
-# Massaged to convert to Python enum.
+# Mapping der MeteoSwiss Icon-IDs auf HA Conditions
 CODE_TO_CONDITION_MAP = {
     1: (Condition.sunny, "sunny"),
     2: (Condition.partly_cloudy, "mostly sunny, some clouds"),
     3: (Condition.partly_cloudy, "partly sunny, thick passing clouds"),
     4: (Condition.partly_cloudy, "overcast"),
     5: (Condition.cloudy, "very cloudy"),
-    6: (Condition.rainy, "sunny intervals,  isolated showers"),
+    6: (Condition.rainy, "sunny intervals, isolated showers"),
     7: (Condition.snowy_rainy, "sunny intervals, isolated sleet"),
     8: (Condition.snowy, "sunny intervals, snow showers"),
     9: (Condition.rainy, "overcast, some rain showers"),
@@ -116,12 +111,12 @@ CODE_TO_CONDITION_MAP = {
     112: (Condition.lightning, "slightly stormy"),
     113: (Condition.lightning_rainy, "storms"),
     114: (Condition.rainy, "very cloudy, light rain"),
-    115: (Condition.snowy_rainy, "very cloudy, light rain and snow  showers"),
+    115: (Condition.snowy_rainy, "very cloudy, light rain and snow showers"),
     116: (Condition.snowy, "very cloudy, light snowfall"),
     117: (Condition.rainy, "very cloudy, intermittent rain"),
     118: (Condition.snowy_rainy, "very cloudy, intermittant mixed rain and snowfall"),
     119: (Condition.snowy, "very cloudy, intermittent snowfall"),
-    120: (Condition.pouring, "very cloudy,  constant rain"),
+    120: (Condition.pouring, "very cloudy, constant rain"),
     121: (Condition.snowy_rainy, "very cloudy, frequent rain and snowfall"),
     122: (Condition.snowy, "very cloudy, heavy snowfall"),
     123: (Condition.lightning_rainy, "very cloudy, slightly stormy"),
@@ -152,124 +147,89 @@ SENSOR_TYPE_ICON = "icon"
 SENSOR_TYPE_CLASS = "device_class"
 SENSOR_DATA_ID = "msDataId"
 
-"""
-From https://data.geo.admin.ch/ch.meteoschweiz.messwerte-aktuell/info/VQHA80_de.txt :
-
-Legende für VQHA80
-Station/Location;yyyyMMddHHmm;tre200s0;rre150z0;sre000z0;gre000z0;ure200s0;tde200s0;dkl010z0;fu3010z0;fu3010z1;prestas0;pp0qffs0;pp0qnhs0;ppz850s0;ppz700s0;dv1towz0;fu3towz0;fu3towz1;ta1tows0;uretows0;tdetows0     
-
-Station/Location https://data.geo.admin.ch/ch.meteoschweiz.messnetz-automatisch/ch.meteoschweiz.messnetz-automatisch_de.csv
-
-Zeitangaben in UTC: 00:40 UTC = 02:40 Sommerzeit
-                              = 01:40 Winterzeit
-
-Fehlende Messwerte            -
-
-Parameter    Einheit        Beschreibung
-tre200s0     °C             Lufttemperatur 2 m über Boden; Momentanwert
-rre150z0     mm             Niederschlag; Zehnminutensumme
-sre000z0     min            Sonnenscheindauer; Zehnminutensumme
-gre000z0     W/m²           Globalstrahlung; Zehnminutenmittel
-ure200s0     %              Relative Luftfeuchtigkeit 2 m über Boden; Momentanwert
-tde200s0     °C             Taupunkt 2 m über Boden; Momentanwert
-dkl010z0     °              Windrichtung; Zehnminutenmittel
-fu3010z0     km/h           Windgeschwindigkeit; Zehnminutenmittel
-fu3010z1     km/h           Böenspitze (Sekundenböe); Maximum
-prestas0     hPa            Luftdruck auf Stationshöhe (QFE); Momentanwert
-pp0qffs0     hPa            Luftdruck reduziert auf Meeresniveau (QFF); Momentanwert
-pp0qnhs0     hPa            Luftdruck reduziert auf Meeresniveau mit Standardatmosphäre (QNH); Momentanwert
-ppz850s0     gpm            Geopotentielle Höhe der 850 hPa-Fläche; Momentanwert
-ppz700s0     gpm            Geopotentielle Höhe der 700 hPa-Fläche; Momentanwert
-dv1towz0     °              Windrichtung vektoriell; Zehnminutenmittel; Instrument 1
-fu3towz0     km/h           Windgeschwindigkeit Turm; Zehnminutenmittel
-fu3towz1     km/h           Böenspitze (Sekundenböe) Turm; Maximum
-ta1tows0     °C             Lufttemperatur Instrument 1
-uretows0     %              Relative Luftfeuchtigkeit Turm; Momentanwert
-tdetows0     °C             Taupunkt Turm
-"""
 SENSOR_TYPES = {
     "temperature": {
-        SENSOR_TYPE_NAME: "temperature",
+        SENSOR_TYPE_NAME: "Temperature",
         SENSOR_TYPE_UNIT: UnitOfTemperature.CELSIUS,
         SENSOR_TYPE_ICON: "mdi:thermometer",
-        SENSOR_TYPE_CLASS: "temperature",
+        SENSOR_TYPE_CLASS: SensorDeviceClass.TEMPERATURE,
         SENSOR_DATA_ID: "tre200s0",
     },
     "10minrain": {
-        SENSOR_TYPE_NAME: "10 minute rain",
-        SENSOR_TYPE_UNIT: "mm",
+        SENSOR_TYPE_NAME: "Precipitation",
+        SENSOR_TYPE_UNIT: UnitOfVolumetricFlux.MILLIMETERS_PER_HOUR,
         SENSOR_TYPE_ICON: "mdi:water",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.PRECIPITATION,
         SENSOR_DATA_ID: "rre150z0",
     },
     "10minsun": {
-        SENSOR_TYPE_NAME: "10 minute sun",
+        SENSOR_TYPE_NAME: "Sunshine Duration",
         SENSOR_TYPE_UNIT: UnitOfTime.MINUTES,
         SENSOR_TYPE_ICON: "mdi:weather-sunny",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.DURATION,
         SENSOR_DATA_ID: "sre000z0",
     },
     "sun_radiant": {
-        SENSOR_TYPE_NAME: "sun irradiation",
+        SENSOR_TYPE_NAME: "Solar Irradiation",
         SENSOR_TYPE_UNIT: UnitOfIrradiance.WATTS_PER_SQUARE_METER,
         SENSOR_TYPE_ICON: "mdi:weather-sunny",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.IRRADIANCE,
         SENSOR_DATA_ID: "gre000z0",
     },
     "humidity": {
-        SENSOR_TYPE_NAME: "humidity",
+        SENSOR_TYPE_NAME: "Humidity",
         SENSOR_TYPE_UNIT: PERCENTAGE,
         SENSOR_TYPE_ICON: "mdi:water-percent",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.HUMIDITY,
         SENSOR_DATA_ID: "ure200s0",
     },
     "dew_point": {
-        SENSOR_TYPE_NAME: "dew point",
+        SENSOR_TYPE_NAME: "Dew Point",
         SENSOR_TYPE_UNIT: UnitOfTemperature.CELSIUS,
         SENSOR_TYPE_ICON: "mdi:weather-fog",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.TEMPERATURE,
         SENSOR_DATA_ID: "tde200s0",
     },
     "wind_direction": {
-        SENSOR_TYPE_NAME: "wind direction",
+        SENSOR_TYPE_NAME: "Wind Direction",
         SENSOR_TYPE_UNIT: DEGREE,
         SENSOR_TYPE_ICON: "mdi:compass-rose",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: None, # Es gibt keine Wind-Direction-Klasse in HA
         SENSOR_DATA_ID: "dkl010z0",
     },
     "wind_speed": {
-        SENSOR_TYPE_NAME: "wind speed",
+        SENSOR_TYPE_NAME: "Wind Speed",
         SENSOR_TYPE_UNIT: UnitOfSpeed.KILOMETERS_PER_HOUR,
         SENSOR_TYPE_ICON: "mdi:weather-windy",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.WIND_SPEED,
         SENSOR_DATA_ID: "fu3010z0",
     },
     "wind_speed_max": {
-        SENSOR_TYPE_NAME: "wind speed max",
+        SENSOR_TYPE_NAME: "Wind Gust",
         SENSOR_TYPE_UNIT: UnitOfSpeed.KILOMETERS_PER_HOUR,
         SENSOR_TYPE_ICON: "mdi:weather-windy",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.WIND_SPEED,
         SENSOR_DATA_ID: "fu3010z1",
     },
     "pressure": {
-        SENSOR_TYPE_NAME: "pressure",
+        SENSOR_TYPE_NAME: "Pressure (QFE)",
         SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
         SENSOR_TYPE_ICON: "mdi:gauge",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.PRESSURE,
         SENSOR_DATA_ID: "prestas0",
     },
     "pressure_qff": {
-        SENSOR_TYPE_NAME: "pressure QFF",
+        SENSOR_TYPE_NAME: "Pressure (QFF)",
         SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
         SENSOR_TYPE_ICON: "mdi:gauge",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.PRESSURE,
         SENSOR_DATA_ID: "pp0qffs0",
     },
     "pressure_qnh": {
-        SENSOR_TYPE_NAME: "pressure QNH",
+        SENSOR_TYPE_NAME: "Pressure (QNH)",
         SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
         SENSOR_TYPE_ICON: "mdi:gauge",
-        SENSOR_TYPE_CLASS: None,
+        SENSOR_TYPE_CLASS: SensorDeviceClass.PRESSURE,
         SENSOR_DATA_ID: "pp0qnhs0",
     },
 }
