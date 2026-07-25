@@ -42,6 +42,7 @@ from custom_components.meteoswiss.const import (
     CONF_REAL_TIME_PRECIPITATION_NAME,
     CONF_STATION,
     DOMAIN,
+    STATION_URL,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -226,7 +227,7 @@ class MeteoSwissWeather(
                 self._attr_precipitation_station_name,
             )
         if self._attr_weather_station or self._attr_precipitation_station:
-            url = "https://rudd-o.com/meteostations"
+            url = STATION_URL
             a += "  Stations available at %s ." % (url,)
         else:
             a += "  No real-time stations used by this weather entry."

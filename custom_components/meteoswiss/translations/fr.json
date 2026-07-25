@@ -27,7 +27,7 @@
             "cannot_query_postcode": "OpenStreetMap a refusé de deviner le code postal pour votre emplacement; veuillez entrer les informations manuellement",
             "lat": "La latitude fournie ne tombe pas entre -90 et 90 degrés",
             "lon": "La longitude fournie ne tombe pas entre -180 et 180 degrés",
-            "invalid_station_name": "Le nom de la station est invalide; veuillez consulter https://rudd-o.com/meteostations pour la liste des stations",
+            "invalid_station_name": "Le nom de la station est invalide; veuillez consulter {station_url} pour la liste des stations",
             "invalid_postcode": "Le code postal est invalide. Cette intégration ne fonctionne que avec les codes postaux suisses",
             "forecast_name_empty": "Le nom de prévision ne peut pas être vide",
             "empty_name": "Le nom à afficher est vide",
@@ -58,7 +58,7 @@
                     "precipitation_station": "Station météo en temps réel pour la précipitation",
                     "real_time_precipitation_name": "Noms des entités pour la précipitation"
                 },
-                "description": "La station météorologique en temps réel est utilisée pour consulter les conditions météorologiques actuelles de la station et les fournir en tant que capteur. La sélection de la première option de la liste désactive les capteurs en temps réel. \n- Si une station météorologique est sélectionnée, le champ des noms d'entités en temps réel est utilisé pour nommer les entités en temps réel (capteurs). Si aucune station n'est choisie, le champ des noms des entités en temps réel est ignoré.\n- https://rudd-o.com/meteostations dresse la liste des stations météorologiques en temps réel disponibles.",
+                "description": "La station météorologique en temps réel est utilisée pour consulter les conditions météorologiques actuelles de la station et les fournir en tant que capteur. La sélection de la première option de la liste désactive les capteurs en temps réel. \n- Si une station météorologique est sélectionnée, le champ des noms d'entités en temps réel est utilisé pour nommer les entités en temps réel (capteurs). Si aucune station n'est choisie, le champ des noms des entités en temps réel est ignoré.\n- {station_url} dresse la liste des stations météorologiques en temps réel disponibles.",
                 "title": "Météo en temps réel"
             }
         }

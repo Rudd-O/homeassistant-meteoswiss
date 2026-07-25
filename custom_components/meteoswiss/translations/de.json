@@ -27,7 +27,7 @@
             "cannot_query_postcode": "OpenStreetMap weigerte sich, das Postleitzahl für deine Standort zu erraten; bitte richten Sie die Informationen manuell ein",
             "lat": "Die gegebene Breite liegt nicht zwischen -90 und 90 Grad",
             "lon": "Die gegebene Länge liegt nicht zwischen -180 und 180 Grad",
-            "invalid_station_name": "Stationsname ist ungültig; bitte überprüfe https://rudd-o.com/meteostations für die Liste der Wetterstationen",
+            "invalid_station_name": "Stationsname ist ungültig; bitte überprüfe {station_url} für die Liste der Wetterstationen",
             "invalid_postcode": "Postleitzahl ist ungültig; diese Integration funktioniert nur mit Schweizer Postleitzahlen",
             "forecast_name_empty": "Vorausberechnetes Name kann nicht leer sein",
             "empty_name": "Der Anzeigename ist leer",
@@ -58,7 +58,7 @@
                     "precipitation_station": "Echtzeit-Niederschlagswetterstation",
                     "real_time_precipitation_name": "Name des Niederschlagswetterstations"
                 },
-                "description": "Die aktuelle Wetterstation wird verwendet, um die aktuellen Wetterdaten am Standort zu finden und als Sensoren bereitzustellen. Wenn Sie das erste Option der Liste auswählen, deaktiveren Sie die Akuten Wetter-Sensoren.\\n\\nWenn eine Wetterstation ausgewählt wird, wird das Feld Real-time entity names verwendet, um den aktuellen Wetterdaten Namen zu benennen. Wenn keine Station gewählt ist, wird das Feld Real-time entity names ignoriert.\\n\\nhttps://rudd-o.com/meteostations listet die verfügbaren aktuelle Wetterstationen auf.",
+                "description": "Die aktuelle Wetterstation wird verwendet, um die aktuellen Wetterdaten am Standort zu finden und als Sensoren bereitzustellen. Wenn Sie das erste Option der Liste auswählen, deaktiveren Sie die Akuten Wetter-Sensoren.\\n\\nWenn eine Wetterstation ausgewählt wird, wird das Feld Real-time entity names verwendet, um den aktuellen Wetterdaten Namen zu benennen. Wenn keine Station gewählt ist, wird das Feld Real-time entity names ignoriert.\\n\\n{station_url} listet die verfügbaren aktuelle Wetterstationen auf.",
                 "title": "Aktuelles Wetter"
             }
         }

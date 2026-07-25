@@ -27,7 +27,7 @@
             "cannot_query_postcode": "OpenStreetMap ha refusà d'enriclar il numer da posta per Vossa plazza; inditgai p.pl. las infurmaziuns a maun",
             "lat": "La lita furnida na croda betg tranter -90 y 90 grad",
             "lon": "La lunghezza furnida na croda betg tranter -180 y 180 grad",
-            "invalid_station_name": "Il num da la staziun è nunvalaivel; per plaschair controlla https://rudd-o.com/meteostations per la glista da las staziuns",
+            "invalid_station_name": "Il num da la staziun è nunvalaivel; per plaschair controlla {station_url} per la glista da las staziuns",
             "invalid_postcode": "Il numer da posta è nunvalaivel; questa integraziun funcziuna mo cun ils numers postals svizzers",
             "forecast_name_empty": "Problems na pon ins betg dir vids",
             "empty_name": "Il num da la display è vid",
@@ -58,7 +58,7 @@
                     "precipitation_station": "Staziun da precipitaziuns per propi",
                     "real_time_precipitation_name": "Drecipitaziuns en temp real"
                 },
-                "description": "La staziun meteorologica per propi serva a sondar l'aura actuala a la staziun e la furnescha sco sensurs. Eleger l'emprima varianta da la glista impedescha sensurs da l'aura en temp real.\n\nI vegn tschernida ina staziun meteorologica, serva ils nums da las unitads en temp real, il champ per numnar las unitads en temp real (sensurs).  Sch'i na vegn tschernida nagina staziun, ignoreschan ins ils nums dal sectur real.\nhttps://rudd-o.com/meteostations numna las staziuns meteorologicas che stattan a disposiziun.",
+                "description": "La staziun meteorologica per propi serva a sondar l'aura actuala a la staziun e la furnescha sco sensurs. Eleger l'emprima varianta da la glista impedescha sensurs da l'aura en temp real.\n\nI vegn tschernida ina staziun meteorologica, serva ils nums da las unitads en temp real, il champ per numnar las unitads en temp real (sensurs).  Sch'i na vegn tschernida nagina staziun, ignoreschan ins ils nums dal sectur real.\n{station_url} numna las staziuns meteorologicas che stattan a disposiziun.",
                 "title": "Aura per propi"
             }
         }
