@@ -42,9 +42,12 @@ from custom_components.meteoswiss.const import (
     CONF_REAL_TIME_PRECIPITATION_NAME,
     CONF_STATION,
     DOMAIN,
+    STATION_URL,
 )
 
 _LOGGER = logging.getLogger(__name__)
+
+INVALID_FORECAST_VALUE = 32767
 
 
 async def async_setup_entry(
@@ -112,6 +115,7 @@ class MeteoSwissWeather(
         coordinator: MeteoSwissDataUpdateCoordinator,
     ):
         super().__init__(coordinator)
+        self._invalid_legacy_icon_logged = False
         self._attr_unique_id = "weather.%s" % integration_id
         self._attr_post_code = coordinator.data[CONF_POSTCODE]
         self._attr_station = coordinator.data[CONF_STATION]
@@ -185,14 +189,28 @@ class MeteoSwissWeather(
 
     @property
     def condition(self) -> str | None:
-        symbolId = self._forecastData["currentWeather"]["icon"]
+        current_weather = self._forecastData["currentWeather"]
+        symbolId = current_weather.get("icon")
+        if symbolId in (None, INVALID_FORECAST_VALUE):
+            replacement = current_weather.get("iconV2")
+            if not self._invalid_legacy_icon_logged:
+                _LOGGER.warning(
+                    "MeteoSwiss returned invalid legacy current-weather icon %r; "
+                    "using iconV2 %r",
+                    symbolId,
+                    replacement,
+                )
+                self._invalid_legacy_icon_logged = True
+            symbolId = replacement
+        else:
+            self._invalid_legacy_icon_logged = False
         try:
             cond: str | None = (
                 str(CODE_TO_CONDITION_MAP.get(symbolId, ("", None))[0]) or None
             )
             if cond is None:
                 _LOGGER.error(
-                    "Expected a known int for the forecast icon, not None",
+                    "MeteoSwiss returned no recognized current-weather icon: %r",
                     symbolId,
                 )
                 return STATE_UNAVAILABLE
@@ -226,7 +244,7 @@ class MeteoSwissWeather(
                 self._attr_precipitation_station_name,
             )
         if self._attr_weather_station or self._attr_precipitation_station:
-            url = "https://rudd-o.com/meteostations"
+            url = STATION_URL
             a += "  Stations available at %s ." % (url,)
         else:
             a += "  No real-time stations used by this weather entry."

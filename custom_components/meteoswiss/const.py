@@ -33,6 +33,8 @@ DEFAULT_UPDATE_INTERVAL = 5
 
 USER_AGENT = "MeteoSwiss Home Assistant integration"
 
+STATION_URL = "https://rudd-o.com/meteostations"
+
 
 class Condition(StrEnum):
     partly_cloudy = "partlycloudy"

@@ -27,7 +27,7 @@
             "cannot_query_postcode": "OpenStreetMap konnte die Postleitzahl für deinen Standort nicht bestimmen; bitte gib die Informationen manuell ein",
             "lat": "Die angegebene Breitengrad-Koordinate liegt nicht zwischen -90 und 90 Grad",
             "lon": "Die angegebene Längengrad-Koordinate liegt nicht zwischen -180 und 180 Grad",
-            "invalid_station_name": "Stationsname ist ungültig; bitte prüfe die Stationsliste unter https://rudd-o.com/meteostations",
+            "invalid_station_name": "Stationsname ist ungültig; bitte prüfe die Stationsliste unter {station_url}",
             "invalid_postcode": "Postleitzahl ist ungültig; diese Integration funktioniert nur mit Schweizer Postleitzahlen",
             "forecast_name_empty": "Der Prognose-Name darf nicht leer sein",
             "empty_name": "Der Anzeigename ist leer",
@@ -58,7 +58,7 @@
                     "precipitation_station": "Echtzeit-Niederschlagsstation",
                     "real_time_precipitation_name": "Echtzeit-Niederschlags-Entity-Namen"
                 },
-                "description": "Die Echtzeit-Wetter- und Niederschlagsstationen werden verwendet, um das aktuelle Wetter und den Niederschlag der Station abzurufen und als Sensoren bereitzustellen. Die Auswahl der ersten Option in der Liste deaktiviert die Echtzeit-Wettersensoren.\n\nWenn eine Wetterstation ausgewählt ist, wird das Feld für die Echtzeit-Entity-Namen verwendet, um die Echtzeit-(Sensor)-Entities zu benennen. Wenn keine Station ausgewählt ist, wird das Feld ignoriert.\n\nUnter https://rudd-o.com/meteostations findest du die verfügbaren Echtzeitstationen.",
+                "description": "Die Echtzeit-Wetter- und Niederschlagsstationen werden verwendet, um das aktuelle Wetter und den Niederschlag der Station abzurufen und als Sensoren bereitzustellen. Die Auswahl der ersten Option in der Liste deaktiviert die Echtzeit-Wettersensoren.\n\nWenn eine Wetterstation ausgewählt ist, wird das Feld für die Echtzeit-Entity-Namen verwendet, um die Echtzeit-(Sensor)-Entities zu benennen. Wenn keine Station ausgewählt ist, wird das Feld ignoriert.\n\nUnter {station_url} findest du die verfügbaren Echtzeitstationen.",
                 "title": "Echtzeit-Wetter- und Niederschlagsstationen"
             }
         }

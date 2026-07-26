@@ -24,6 +24,7 @@ from custom_components.meteoswiss.const import (
     CONF_UPDATE_INTERVAL,
     DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
+    STATION_URL,
     USER_AGENT,
 )
 
@@ -317,7 +318,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             self._lon,
         )
 
-        errors = {}
+        errors: dict[str, str] = {}
         if user_input is not None:
             if user_input[CONF_STATION] not in weather_stations:
                 errors[CONF_STATION] = "invalid_station_name"
@@ -390,7 +391,12 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
 
         if errors or user_input is None:
             return self.async_show_form(
-                step_id="user_three", data_schema=schema, errors=errors
+                step_id="user_three",
+                data_schema=schema,
+                errors=errors,
+                description_placeholders={
+                    "station_url": STATION_URL,
+                },
             )
 
         data = {

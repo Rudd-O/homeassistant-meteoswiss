@@ -27,7 +27,7 @@
             "cannot_query_postcode": "OpenStreetMap refused to guess the postal code for your location; please enter the information manually",
             "lat": "The supplied latitude does not fall between -90 y 90 degrees",
             "lon": "The supplied longitude does not fall between -180 y 180 degrees",
-            "invalid_station_name": "Station name is invalid; please check https://rudd-o.com/meteostations for station list",
+            "invalid_station_name": "Station name is invalid; please check {station_url} for station list",
             "invalid_postcode": "Postal code is invalid; this integration only works with Swiss postal codes",
             "forecast_name_empty": "Forecast name cannot be empty",
             "empty_name": "The display name is empty",
@@ -58,7 +58,7 @@
                     "precipitation_station": "Real-time precipitation station",
                     "real_time_precipitation_name": "Real-time precipitation entity names"
                 },
-                "description": "The real-time weather and precipitation stations are used to look up the current weather and precipitation at the station and provide them as sensors.  Selecting the first option of the list disables real-time weather sensors.\n\nIf a weather station is selected, the real-time entity names field is used to name the real-time (sensor) entities.  If no station is chosen, the real-time entity names field is ignored.\n\nhttps://rudd-o.com/meteostations lists the available real-time stations.",
+                "description": "The real-time weather and precipitation stations are used to look up the current weather and precipitation at the station and provide them as sensors.  Selecting the first option of the list disables real-time weather sensors.\n\nIf a weather station is selected, the real-time entity names field is used to name the real-time (sensor) entities.  If no station is chosen, the real-time entity names field is ignored.\n\n{station_url} lists the available real-time stations.",
                 "title": "Real-time weather and precipitation stations"
             }
         }

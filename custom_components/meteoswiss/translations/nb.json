@@ -27,7 +27,7 @@
             "cannot_query_postcode": "OpenStreetMap ne ønsket å gueß postnummer for din lokasjon; skriv inn informasjonen selv",
             "lat": "Høyden er utenfor grensene -90 til 90 grader",
             "lon": "Breddelsen er utenfor grensene -180 til 180 grader",
-            "invalid_station_name": "Stasjonsnavnet er ugyldig; vennligst sjekk https://rudd-o.com/meteostations for stasjonsliste",
+            "invalid_station_name": "Stasjonsnavnet er ugyldig; vennligst sjekk {station_url} for stasjonsliste",
             "invalid_postcode": "Postnummeret er ugyldig. Denne integrasjonen fungerer bare med Sveits' postnummer",
             "forecast_name_empty": "Været navn kan ikke være tomt",
             "empty_name": "Visningsnavnet er tomt",
@@ -58,7 +58,7 @@
                     "precipitation_station": "Sanntids-nedbørstasjon",
                     "real_time_precipitation_name": "Navn på sanntids- og nedbørs-entiteter"
                 },
-                "description": "Sanntids værstatonen brukes til å lete opp aktuell været ved stasjonen og å gi disse som sensorer. Hvis du velger første alternativ i listen, deaktiverer dette sanntids- og sensorenheter.\\n\\nHvis en værstasjon blir valgt, brukes feltet for navn på sanntids- og sensorenheter til å navngi sanntids- (sensore) enheter. Hvis ingen stasjon blir valgt, ignoreres feltet for navn på sanntids- og sensorenheter.\\n\\nhttps://rudd-o.com/meteostations viser listen over tillgjengelige sanntids værstationer.",
+                "description": "Sanntids værstatonen brukes til å lete opp aktuell været ved stasjonen og å gi disse som sensorer. Hvis du velger første alternativ i listen, deaktiverer dette sanntids- og sensorenheter.\\n\\nHvis en værstasjon blir valgt, brukes feltet for navn på sanntids- og sensorenheter til å navngi sanntids- (sensore) enheter. Hvis ingen stasjon blir valgt, ignoreres feltet for navn på sanntids- og sensorenheter.\\n\\n{station_url} viser listen over tillgjengelige sanntids værstationer.",
                 "title": "Sanntidsvær"
             }
         }
