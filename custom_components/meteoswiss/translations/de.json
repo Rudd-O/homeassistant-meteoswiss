@@ -1,65 +1,65 @@
 {
     "issues": {
         "deprecated_yaml": {
-            "title": "Die YAML-Konfiguration von MeteoSchweiz wird entfernt",
-            "description": "Es ist nicht mehr möglich MeteoSchweiz durch YAML zu konfigurieren.\\n\\nDeine bestehende YAML-Konfiguration wurde in das Benutzergrensetritt automatisch importiert.\\n\\nEntfernen Sie die Meteo-Konfiguration aus ihrer configuration.yaml-Datei und starten Sie Home Assistant neu, um dieses Problem zu beheben."
+            "title": "Die MeteoSwiss YAML-Konfiguration wird entfernt",
+            "description": "Die Konfiguration von MeteoSwiss über YAML wird entfernt.\n\nDeine bestehende YAML-Konfiguration wurde automatisch in die Benutzeroberfläche importiert.\n\nEntferne die MeteoSwiss-Konfiguration aus deiner configuration.yaml-Datei und starte Home Assistant neu, um dieses Problem zu beheben."
         },
         "station_no_data": {
-            "title": "Die MeteoSchweiz-Wetterstation scheint verschwunden zu sein",
-            "description": "Die MeteoSchweiz-Wetterstation, die verwendet wird ({station}), bietet keine Daten mehr an.\\n\\nDerzeit ist es nur möglich, dies zu korrigieren, indem man den MeteoSchweiz-Integration entfernt und neu hinzufügt und eine neue Wetterstation auswählt.\\n\\nBis dieses Problem behoben ist, werden alle akuten Wetter-Sensoren und Berichte von dieser Station als unavailable angezeigt."
+            "title": "MeteoSwiss-Wetterstation scheint nicht mehr verfügbar zu sein",
+            "description": "Die Echtzeit-Wetterstation, die MeteoSwiss verwendet ({station}), liefert keine Daten mehr.\n\nAktuell besteht die einzige Lösung darin, die MeteoSwiss-Integration zu entfernen und wieder hinzuzufügen und dabei eine neue Echtzeit-Wetterstation auszuwählen.\n\nBis diese Reparatur durchgeführt wurde, werden alle Echtzeit-Wettersensoren und -berichte dieser Station als nicht verfügbar angezeigt."
         },
         "post_code_no_data": {
-            "title": "MeteoSuisse scheint keine Vorhersagen für die Postleitzahl bereitzustellen",
-            "description": "Die Postleitzahl {post_code} scheint keine Vorhersage verfügbar zu haben.\n\nAktuell ist nur eine mögliche Reparatur möglich, nämlich das Entfernen und erneute Hinzufügen der MeteoSuisse-Integration, Auswahl eines neuen Postcodes.\n\nBis zur Durchführung dieser Reparatur wird die Vorhersage als nicht verfügbar angezeigt."
+            "title": "MeteoSwiss scheint keine Prognosen für diese Postleitzahl bereitzustellen",
+            "description": "Für die Postleitzahl {post_code} scheint keine Prognose verfügbar zu sein.\n\nAktuell besteht die einzige Lösung darin, die MeteoSwiss-Integration zu entfernen und wieder hinzuzufügen und dabei eine neue Postleitzahl auszuwählen.\n\nBis diese Reparatur durchgeführt wurde, wird die Prognose als nicht verfügbar angezeigt."
         },
         "improperly_configured": {
-            "title": "Die MeteoSchweiz-Integration ist nicht richtig konfiguriert",
-            "description": "Die MeteoSchweiz-Integration mit der ID {entry_id} ist nicht korrekt konfiguriert.\\n\\nBitte entfernen Sie ihre Konfigurations-Eintrag und erstellen Sie ihn wieder neu."
+            "title": "MeteoSwiss-Integration ist nicht korrekt konfiguriert",
+            "description": "Die MeteoSwiss-Integration mit der Eintrags-ID {entry_id} ist nicht korrekt konfiguriert.\n\nBitte entferne deinen Konfigurationseintrag und erstelle ihn erneut."
         }
     },
     "config": {
         "abort": {
             "already_configured": "Bereits konfiguriert",
-            "unknown": "Unerkennbares Fehler: Bitte versuche es später noch einmal"
+            "unknown": "Unbekannter Fehler: Bitte versuche es später erneut"
         },
         "error": {
-            "cannot_query_address": "OpenStreetMap weigerte sich, die Adresse für deine Standort zu erraten; bitte richten Sie die Informationen manuell ein",
-            "cannot_query_postcode": "OpenStreetMap weigerte sich, das Postleitzahl für deine Standort zu erraten; bitte richten Sie die Informationen manuell ein",
-            "lat": "Die gegebene Breite liegt nicht zwischen -90 und 90 Grad",
-            "lon": "Die gegebene Länge liegt nicht zwischen -180 und 180 Grad",
-            "invalid_station_name": "Stationsname ist ungültig; bitte überprüfe {station_url} für die Liste der Wetterstationen",
+            "cannot_query_address": "OpenStreetMap konnte die Adresse für deinen Standort nicht bestimmen; bitte gib die Informationen manuell ein",
+            "cannot_query_postcode": "OpenStreetMap konnte die Postleitzahl für deinen Standort nicht bestimmen; bitte gib die Informationen manuell ein",
+            "lat": "Die angegebene Breitengrad-Koordinate liegt nicht zwischen -90 und 90 Grad",
+            "lon": "Die angegebene Längengrad-Koordinate liegt nicht zwischen -180 und 180 Grad",
+            "invalid_station_name": "Stationsname ist ungültig; bitte prüfe die Stationsliste unter {station_url}",
             "invalid_postcode": "Postleitzahl ist ungültig; diese Integration funktioniert nur mit Schweizer Postleitzahlen",
-            "forecast_name_empty": "Vorausberechnetes Name kann nicht leer sein",
+            "forecast_name_empty": "Der Prognose-Name darf nicht leer sein",
             "empty_name": "Der Anzeigename ist leer",
-            "update_interval_too_low": "Aktualisierungsintervall ist zu niedrig; es muss mindestens 1 Minute sein"
+            "update_interval_too_low": "Das Aktualisierungsintervall ist zu niedrig; es muss mindestens 1 Minute betragen"
         },
         "step": {
             "user": {
                 "data": {
-                    "latitude": "Breite",
-                    "longitude": "Länge"
+                    "latitude": "Breitengrad",
+                    "longitude": "Längengrad"
                 },
-                "description": "Bewahrheit deinen geografischen Standort. Dies wird verwendet, um die nächste Wetterstation zu erraten und deine Postleitzahl für Vorhersagen anzunähern.",
+                "description": "Bestätige deine geografische Position. Diese wird verwendet, um die nächstgelegene Echtzeit-Wetterstation zu bestimmen und deine Postleitzahl für Prognosen zu approximieren.",
                 "title": "Standort"
             },
             "user_two": {
                 "data": {
                     "postcode": "Postleitzahl",
-                    "forecast_name": "Vorausberechnetes Name (Wetter) Einheit Namen",
-                    "update_interval": "Aktualisierungsintervall in Minuten"
+                    "forecast_name": "Name des Prognose-(Wetter)-Entities",
+                    "update_interval": "Aktualisierungsintervall (Minuten)"
                 },
-                "description": "Die Postleitzahl wird verwendet, um die 5-Tages-Vorhersage zu finden. Der Name, den du hier einträgst, wird für die Vorausberechnete (Wetter) Einheit Namen verwendet.",
-                "title": "Vorhersage"
+                "description": "Die Postleitzahl wird verwendet, um die 5-Tage-Prognose abzurufen. Der hier eingegebene Name wird für das Prognose-(Wetter)-Entity verwendet.",
+                "title": "Prognose"
             },
             "user_three": {
                 "data": {
                     "station": "Echtzeit-Wetterstation",
-                    "real_time_name": "Name des Wetterstations",
-                    "precipitation_station": "Echtzeit-Niederschlagswetterstation",
-                    "real_time_precipitation_name": "Name des Niederschlagswetterstations"
+                    "real_time_name": "Echtzeit-Wetter-Entity-Namen",
+                    "precipitation_station": "Echtzeit-Niederschlagsstation",
+                    "real_time_precipitation_name": "Echtzeit-Niederschlags-Entity-Namen"
                 },
-                "description": "Die aktuelle Wetterstation wird verwendet, um die aktuellen Wetterdaten am Standort zu finden und als Sensoren bereitzustellen. Wenn Sie das erste Option der Liste auswählen, deaktiveren Sie die Akuten Wetter-Sensoren.\\n\\nWenn eine Wetterstation ausgewählt wird, wird das Feld Real-time entity names verwendet, um den aktuellen Wetterdaten Namen zu benennen. Wenn keine Station gewählt ist, wird das Feld Real-time entity names ignoriert.\\n\\n{station_url} listet die verfügbaren aktuelle Wetterstationen auf.",
-                "title": "Aktuelles Wetter"
+                "description": "Die Echtzeit-Wetter- und Niederschlagsstationen werden verwendet, um das aktuelle Wetter und den Niederschlag der Station abzurufen und als Sensoren bereitzustellen. Die Auswahl der ersten Option in der Liste deaktiviert die Echtzeit-Wettersensoren.\n\nWenn eine Wetterstation ausgewählt ist, wird das Feld für die Echtzeit-Entity-Namen verwendet, um die Echtzeit-(Sensor)-Entities zu benennen. Wenn keine Station ausgewählt ist, wird das Feld ignoriert.\n\nUnter {station_url} findest du die verfügbaren Echtzeitstationen.",
+                "title": "Echtzeit-Wetter- und Niederschlagsstationen"
             }
         }
     }
