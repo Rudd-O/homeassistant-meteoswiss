@@ -326,7 +326,4 @@ class MeteoSwissDataUpdateCoordinator(DataUpdateCoordinator[MeteoSwissClientResu
         newdata[CONF_REAL_TIME_PRECIPITATION_NAME] = (
             self.real_time_precipitation_station_name
         )
-        import pprint
-
-        _LOGGER.debug("Returning data: %s", pprint.pformat(newdata))
         return newdata
