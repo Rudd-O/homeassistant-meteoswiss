@@ -188,8 +188,6 @@ class MeteoSwissWeather(
             self._condition_for_all_stations, "dkl010z0"
         )
 
-    # FIXME add precipitation conditions above.
-
     @property
     def condition(self) -> str | None:
         current_weather = self._forecastData["currentWeather"]
