@@ -9,7 +9,7 @@ from async_timeout import timeout
 from hamsclientfork import meteoSwissClient
 from hamsclientfork.client import ClientResult
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
-from homeassistant.const import Platform
+from homeassistant.const import CONF_NAME, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.issue_registry import IssueSeverity
@@ -21,7 +21,6 @@ from homeassistant.helpers.update_coordinator import (
 
 from custom_components.meteoswiss.const import (
     CONF_FORECAST_NAME,
-    CONF_NAME,
     CONF_POSTCODE,
     CONF_PRECIPITATION_STATION,
     CONF_REAL_TIME_NAME,

@@ -3,20 +3,20 @@
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import TypedDict
 
+from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import (
-    CONF_NAME,
     DEGREE,
-    PERCENTAGE,
     UnitOfIrradiance,
     UnitOfPressure,
+    UnitOfRatio,
     UnitOfSpeed,
     UnitOfTemperature,
     UnitOfTime,
 )
 
 DOMAIN = "meteoswiss"
-CONF_NAME = CONF_NAME
 CONF_PRECIPITATION_NAME = "precipitation_name"
 CONF_FORECAST_NAME = "forecast_name"
 CONF_POSTCODE = "postcode"
@@ -189,89 +189,118 @@ ta1tows0     °C             Lufttemperatur Instrument 1
 uretows0     %              Relative Luftfeuchtigkeit Turm; Momentanwert
 tdetows0     °C             Taupunkt Turm
 """
-SENSOR_TYPES = {
-    "temperature": {
-        SENSOR_TYPE_NAME: "temperature",
-        SENSOR_TYPE_UNIT: UnitOfTemperature.CELSIUS,
-        SENSOR_TYPE_ICON: "mdi:thermometer",
-        SENSOR_TYPE_CLASS: "temperature",
-        SENSOR_DATA_ID: "tre200s0",
-    },
-    "10minrain": {
-        SENSOR_TYPE_NAME: "10 minute rain",
-        SENSOR_TYPE_UNIT: "mm",
-        SENSOR_TYPE_ICON: "mdi:water",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "rre150z0",
-    },
-    "10minsun": {
-        SENSOR_TYPE_NAME: "10 minute sun",
-        SENSOR_TYPE_UNIT: UnitOfTime.MINUTES,
-        SENSOR_TYPE_ICON: "mdi:weather-sunny",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "sre000z0",
-    },
-    "sun_radiant": {
-        SENSOR_TYPE_NAME: "sun irradiation",
-        SENSOR_TYPE_UNIT: UnitOfIrradiance.WATTS_PER_SQUARE_METER,
-        SENSOR_TYPE_ICON: "mdi:weather-sunny",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "gre000z0",
-    },
-    "humidity": {
-        SENSOR_TYPE_NAME: "humidity",
-        SENSOR_TYPE_UNIT: PERCENTAGE,
-        SENSOR_TYPE_ICON: "mdi:water-percent",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "ure200s0",
-    },
-    "dew_point": {
-        SENSOR_TYPE_NAME: "dew point",
-        SENSOR_TYPE_UNIT: UnitOfTemperature.CELSIUS,
-        SENSOR_TYPE_ICON: "mdi:weather-fog",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "tde200s0",
-    },
-    "wind_direction": {
-        SENSOR_TYPE_NAME: "wind direction",
-        SENSOR_TYPE_UNIT: DEGREE,
-        SENSOR_TYPE_ICON: "mdi:compass-rose",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "dkl010z0",
-    },
-    "wind_speed": {
-        SENSOR_TYPE_NAME: "wind speed",
-        SENSOR_TYPE_UNIT: UnitOfSpeed.KILOMETERS_PER_HOUR,
-        SENSOR_TYPE_ICON: "mdi:weather-windy",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "fu3010z0",
-    },
-    "wind_speed_max": {
-        SENSOR_TYPE_NAME: "wind speed max",
-        SENSOR_TYPE_UNIT: UnitOfSpeed.KILOMETERS_PER_HOUR,
-        SENSOR_TYPE_ICON: "mdi:weather-windy",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "fu3010z1",
-    },
-    "pressure": {
-        SENSOR_TYPE_NAME: "pressure",
-        SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
-        SENSOR_TYPE_ICON: "mdi:gauge",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "prestas0",
-    },
-    "pressure_qff": {
-        SENSOR_TYPE_NAME: "pressure QFF",
-        SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
-        SENSOR_TYPE_ICON: "mdi:gauge",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "pp0qffs0",
-    },
-    "pressure_qnh": {
-        SENSOR_TYPE_NAME: "pressure QNH",
-        SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
-        SENSOR_TYPE_ICON: "mdi:gauge",
-        SENSOR_TYPE_CLASS: None,
-        SENSOR_DATA_ID: "pp0qnhs0",
-    },
+
+
+class SensorTypedef(TypedDict):
+    name: str
+    unit: StrEnum | str
+    icon: str
+    device_class: SensorDeviceClass | None
+    msDataId: str
+
+
+_temp_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "temperature",
+    SENSOR_TYPE_UNIT: UnitOfTemperature.CELSIUS,
+    SENSOR_TYPE_ICON: "mdi:thermometer",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.TEMPERATURE,
+    SENSOR_DATA_ID: "tre200s0",
+}
+_rain_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "10 minute rain",
+    SENSOR_TYPE_UNIT: "mm",
+    SENSOR_TYPE_ICON: "mdi:water",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.PRECIPITATION,
+    SENSOR_DATA_ID: "rre150z0",
+}
+_sun_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "10 minute sun",
+    SENSOR_TYPE_UNIT: UnitOfTime.MINUTES,
+    SENSOR_TYPE_ICON: "mdi:weather-sunny",
+    SENSOR_TYPE_CLASS: None,
+    SENSOR_DATA_ID: "sre000z0",
+}
+_radiance_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "sun irradiation",
+    SENSOR_TYPE_UNIT: UnitOfIrradiance.WATTS_PER_SQUARE_METER,
+    SENSOR_TYPE_ICON: "mdi:weather-sunny",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.IRRADIANCE,
+    SENSOR_DATA_ID: "gre000z0",
+}
+_humidity_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "humidity",
+    SENSOR_TYPE_UNIT: UnitOfRatio.PERCENTAGE,
+    SENSOR_TYPE_ICON: "mdi:water-percent",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.HUMIDITY,
+    SENSOR_DATA_ID: "ure200s0",
+}
+_dew_point_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "dew point",
+    SENSOR_TYPE_UNIT: UnitOfTemperature.CELSIUS,
+    SENSOR_TYPE_ICON: "mdi:weather-fog",
+    SENSOR_TYPE_CLASS: None,
+    SENSOR_DATA_ID: "tde200s0",
+}
+_wind_direction_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "wind direction",
+    SENSOR_TYPE_UNIT: DEGREE,
+    SENSOR_TYPE_ICON: "mdi:compass-rose",
+    SENSOR_TYPE_CLASS: None,
+    SENSOR_DATA_ID: "dkl010z0",
+}
+_wind_speed_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "wind speed",
+    SENSOR_TYPE_UNIT: UnitOfSpeed.KILOMETERS_PER_HOUR,
+    SENSOR_TYPE_ICON: "mdi:weather-windy",
+    SENSOR_TYPE_CLASS: None,
+    SENSOR_DATA_ID: "fu3010z0",
+}
+_wind_speed_max_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "wind speed max",
+    SENSOR_TYPE_UNIT: UnitOfSpeed.KILOMETERS_PER_HOUR,
+    SENSOR_TYPE_ICON: "mdi:weather-windy",
+    SENSOR_TYPE_CLASS: None,
+    SENSOR_DATA_ID: "fu3010z1",
+}
+_pressure_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "pressure",
+    SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
+    SENSOR_TYPE_ICON: "mdi:gauge",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.ATMOSPHERIC_PRESSURE,
+    SENSOR_DATA_ID: "prestas0",
+}
+_pressure_qff_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "pressure QFF",
+    SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
+    SENSOR_TYPE_ICON: "mdi:gauge",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.ATMOSPHERIC_PRESSURE,
+    SENSOR_DATA_ID: "pp0qffs0",
+}
+_pressure_qnh_sensor: SensorTypedef = {
+    SENSOR_TYPE_NAME: "pressure QNH",
+    SENSOR_TYPE_UNIT: UnitOfPressure.HPA,
+    SENSOR_TYPE_ICON: "mdi:gauge",
+    SENSOR_TYPE_CLASS: SensorDeviceClass.ATMOSPHERIC_PRESSURE,
+    SENSOR_DATA_ID: "pp0qnhs0",
+}
+
+SENSOR_TYPES: dict[str, SensorTypedef] = {
+    "temperature": _temp_sensor,
+    "10minrain": _rain_sensor,
+    "10minsun": _sun_sensor,
+    "sun_radiant": _radiance_sensor,
+    "humidity": _humidity_sensor,
+    "dew_point": _dew_point_sensor,
+    "wind_direction": _wind_direction_sensor,
+    "wind_speed": _wind_speed_sensor,
+    "wind_speed_max": _wind_speed_max_sensor,
+    # Station Pressure: The raw, actual air pressure measured at a specific location
+    # and elevation without any adjustments.
+    "pressure": _pressure_sensor,
+    # QFF: Pressure corrected to sea level using actual real-time temperatures,
+    # used by meteorologists for weather maps.
+    "pressure_qff": _pressure_qff_sensor,
+    # QNH: Pressure corrected to sea level using a standard atmosphere (ISA), used
+    # by pilots so altimeters show height above sea level.
+    "pressure_qnh": _pressure_qnh_sensor,
 }
