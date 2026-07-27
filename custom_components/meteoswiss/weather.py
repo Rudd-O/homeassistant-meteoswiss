@@ -171,18 +171,6 @@ class MeteoSwissWeather(
         )
 
     @property
-    def pressure_qff(self) -> float | None:
-        return condition_name_to_first_value(
-            self._condition_for_all_stations, "pp0qffs0"
-        )
-
-    @property
-    def pressure_qnh(self) -> float | None:
-        return condition_name_to_first_value(
-            self._condition_for_all_stations, "pp0qnhs0"
-        )
-
-    @property
     def humidity(self) -> float | None:
         return condition_name_to_first_value(
             self._condition_for_all_stations, "ure200s0"
