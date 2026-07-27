@@ -145,10 +145,10 @@ class MeteoSwissWeather(
             a += "  No real-time stations used by this weather entry."
         self._attr_attribution = a
 
+        self._attr_name = coordinator.data[CONF_FORECAST_NAME]
         self.__set_data(coordinator.data)
 
     def __set_data(self, data: MeteoSwissClientResult) -> None:
-        self._displayName = data[CONF_FORECAST_NAME]
         self._forecastData = data["forecast"]
         self._condition_for_all_stations = data["condition"]
 
@@ -157,11 +157,6 @@ class MeteoSwissWeather(
         """Handle data update."""
         data = self.coordinator.data
         self.__set_data(data)
-        self.async_write_ha_state()
-
-    @property
-    def name(self) -> Any:
-        return self._displayName
 
     @property
     def native_temperature(self) -> float | None:
