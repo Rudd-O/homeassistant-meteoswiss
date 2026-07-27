@@ -7,7 +7,7 @@ import logging
 import pprint
 from typing import Any, cast
 
-from hamsclientfork.client import CurrentCondition, DayForecast, HourlyForecast
+from hamsclientfork.client import CurrentCondition
 from homeassistant.components.weather import (
     ATTR_FORECAST_CONDITION,
     ATTR_FORECAST_NATIVE_PRECIPITATION,
@@ -256,8 +256,7 @@ class MeteoSwissWeather(
         fcdata_out: list[Forecast] = []
         # Skip the first element - it's the forecast for the current day
         try:
-            for untyped_forecast in self._forecastData["regionForecast"]:
-                forecast = cast(DayForecast, untyped_forecast)
+            for forecast in self._forecastData["regionForecast"]:
                 data_out: Forecast = {
                     ATTR_FORECAST_TIME: forecast["dayDate"],
                     ATTR_FORECAST_NATIVE_TEMP_LOW: forecast["temperatureMin"],
@@ -285,9 +284,7 @@ class MeteoSwissWeather(
         fcdata_out: list[Forecast] = []
         # Skip the first element - it's the forecast for the current day
         now = datetime.datetime.now(datetime.timezone.utc)
-        forecast_data = cast(
-            list[HourlyForecast], self._forecastData["regionHourlyForecast"]
-        )
+        forecast_data = self._forecastData["regionHourlyForecast"]
         biggers = [f["time"] > now for f in forecast_data]
         try:
             idx = biggers.index(True)
@@ -309,7 +306,7 @@ class MeteoSwissWeather(
             _LOGGER.exception(
                 "Error while converting hourly forecast: %s\nForecast data: %s",
                 e,
-                pprint.pformat(self._forecastData["regionDailyForecast"]),
+                pprint.pformat(self._forecastData["regionHourlyForecast"]),
             )
             raise
         _LOGGER.debug("Hourly forecast has %d items", len(fcdata_out))
