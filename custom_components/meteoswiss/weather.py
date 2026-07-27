@@ -125,6 +125,26 @@ class MeteoSwissWeather(
         self._attr_precipitation_station_name = coordinator.data[
             CONF_REAL_TIME_PRECIPITATION_NAME
         ]
+
+        a = "Data provided by MeteoSwiss."
+        a += "  Forecasts from postal code %s." % (self._attr_postcode,)
+        if self._attr_weather_station:
+            a += "  Real-time weather data from weather station %s (%s)." % (
+                self._attr_weather_station,
+                self._attr_weather_station_name,
+            )
+        if self._attr_precipitation_station:
+            a += "  Real-time precipitation data from weather station %s (%s)." % (
+                self._attr_precipitation_station,
+                self._attr_precipitation_station_name,
+            )
+        if self._attr_weather_station or self._attr_precipitation_station:
+            url = STATION_URL
+            a += "  Stations available at %s ." % (url,)
+        else:
+            a += "  No real-time stations used by this weather entry."
+        self._attr_attribution = a
+
         self.__set_data(coordinator.data)
 
     def __set_data(self, data: MeteoSwissClientResult) -> None:
@@ -228,27 +248,6 @@ class MeteoSwissWeather(
             )
             _LOGGER.error("Forecast data: %r", self._forecastData)
             return STATE_UNAVAILABLE
-
-    @property
-    def attribution(self) -> str:
-        a = "Data provided by MeteoSwiss."
-        a += "  Forecasts from postal code %s." % (self._attr_postcode,)
-        if self._attr_weather_station:
-            a += "  Real-time weather data from weather station %s (%s)." % (
-                self._attr_weather_station,
-                self._attr_weather_station_name,
-            )
-        if self._attr_precipitation_station:
-            a += "  Real-time weather data from weather station %s (%s)." % (
-                self._attr_precipitation_station,
-                self._attr_precipitation_station_name,
-            )
-        if self._attr_weather_station or self._attr_precipitation_station:
-            url = STATION_URL
-            a += "  Stations available at %s ." % (url,)
-        else:
-            a += "  No real-time stations used by this weather entry."
-        return a
 
     def _daily_forecast(self) -> list[Forecast] | None:
         if not self._forecastData:
