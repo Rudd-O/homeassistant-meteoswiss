@@ -8,9 +8,9 @@
             "title": "Una estación meteorológica de tiempo real parece estar ausente",
             "description": "La estación de tiempo real que se usa en MeteoSwiss ({station}) parece ya no ofrecer datos.\n\nDe momento, la única reparación posible es remover esta integración y volver a agregarla, seleccionando una nueva estación meteorológica.\n\nHasta que esta reparación sea efectuada, sus sensores y el estado del tiempo actual aparecerán como no disponibles."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MeteoSwiss parece no proveer pronósticos para el código postal",
-            "description": "El código postal {post_code} no tiene ningún pronóstico disponible.\n\nDe momento, la única reparación posible es remover esta integración y volver a agregarla, seleccionando un nuevo código postal.\n\nHasta que esta reparación sea efectuada, el pronóstico aparecerá como no disponible."
+            "description": "El código postal {postcode} no tiene ningún pronóstico disponible.\n\nDe momento, la única reparación posible es remover esta integración y volver a agregarla, seleccionando un nuevo código postal.\n\nHasta que esta reparación sea efectuada, el pronóstico aparecerá como no disponible."
         },
         "improperly_configured": {
             "title": "La integración MeteoSwiss no está correctamente configurada",

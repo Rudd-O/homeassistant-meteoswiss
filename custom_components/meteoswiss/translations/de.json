@@ -8,9 +8,9 @@
             "title": "MeteoSwiss-Wetterstation scheint nicht mehr verfügbar zu sein",
             "description": "Die Echtzeit-Wetterstation, die MeteoSwiss verwendet ({station}), liefert keine Daten mehr.\n\nAktuell besteht die einzige Lösung darin, die MeteoSwiss-Integration zu entfernen und wieder hinzuzufügen und dabei eine neue Echtzeit-Wetterstation auszuwählen.\n\nBis diese Reparatur durchgeführt wurde, werden alle Echtzeit-Wettersensoren und -berichte dieser Station als nicht verfügbar angezeigt."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MeteoSwiss scheint keine Prognosen für diese Postleitzahl bereitzustellen",
-            "description": "Für die Postleitzahl {post_code} scheint keine Prognose verfügbar zu sein.\n\nAktuell besteht die einzige Lösung darin, die MeteoSwiss-Integration zu entfernen und wieder hinzuzufügen und dabei eine neue Postleitzahl auszuwählen.\n\nBis diese Reparatur durchgeführt wurde, wird die Prognose als nicht verfügbar angezeigt."
+            "description": "Für die Postleitzahl {postcode} scheint keine Prognose verfügbar zu sein.\n\nAktuell besteht die einzige Lösung darin, die MeteoSwiss-Integration zu entfernen und wieder hinzuzufügen und dabei eine neue Postleitzahl auszuwählen.\n\nBis diese Reparatur durchgeführt wurde, wird die Prognose als nicht verfügbar angezeigt."
         },
         "improperly_configured": {
             "title": "MeteoSwiss-Integration ist nicht korrekt konfiguriert",

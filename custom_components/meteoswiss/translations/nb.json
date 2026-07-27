@@ -8,9 +8,9 @@
             "title": "Værstatonen for MeteoSveits ser ut til å være gått",
             "description": "Den sanntids værstasjonen MeteoSveits bruker ({station}) skiller ikke lenger ut data.\n\nFor tiden er det bare mulig å løse dette ved å fjerne og gjeninnføre MeteoSveits-integreringen, velge en ny sanntids værstasjon.\n\nIndtil dette løses, vil alle sanntids- og sensorenheter og rapporter som kommer fra denne stasjonen vises som uoppløselige."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MeteoSveits viser ikke noen forutseigelser for postnummer",
-            "description": "Postnummer {post_code} ser ut til å ha ingen forutseigelser tilgjengelig.\n\nNåværende, den eneste reparasjon mulig består i å fjerne og gjeninnstille integreringen MeteoSveits, velge et nytt postnummer.\n\nInntil denne reparasjon er gjennomført, vil forutseigelser vise seg som uaktuell."
+            "description": "Postnummer {postcode} ser ut til å ha ingen forutseigelser tilgjengelig.\n\nNåværende, den eneste reparasjon mulig består i å fjerne og gjeninnstille integreringen MeteoSveits, velge et nytt postnummer.\n\nInntil denne reparasjon er gjennomført, vil forutseigelser vise seg som uaktuell."
         },
         "improperly_configured": {
             "title": "Integrasjonsfellet for MeteoSveits er ikke konfigurert korrekt",

@@ -44,7 +44,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
         super().__init__()
         self._lat = None
         self._lon = None
-        self._post_code = None
+        self._postcode = None
         self._forecast_name = None
         self._update_interval = None
 
@@ -58,7 +58,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             "step user: starting with lat %s lon %s post %s",
             self._lat,
             self._lon,
-            self._post_code,
+            self._postcode,
         )
 
         def data_schema(lat, lon):
@@ -99,7 +99,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             "step user: continuing with lat %s lon %s post %s",
             self._lat,
             self._lon,
-            self._post_code,
+            self._postcode,
         )
         return await self.async_step_user_two()
 
@@ -114,7 +114,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             "step user two: starting with lat %s lon %s post %s",
             self._lat,
             self._lon,
-            self._post_code,
+            self._postcode,
         )
 
         def data_schema(postcode, name, interval):
@@ -196,14 +196,14 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
                 step_id="user_two", data_schema=schema, errors=errors
             )
 
-        self._post_code = int(user_input[CONF_POSTCODE])
+        self._postcode = int(user_input[CONF_POSTCODE])
         self._forecast_name = user_input[CONF_FORECAST_NAME].strip()
         self._update_interval = int(user_input[CONF_UPDATE_INTERVAL])
         _LOGGER.debug(
             "step user two: continuing with lat %s lon %s post %s name %s",
             self._lat,
             self._lon,
-            self._post_code,
+            self._postcode,
             self._forecast_name,
         )
         return await self.async_step_user_three()
@@ -260,7 +260,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             "step user three: continuing with lat %s lon %s post %s",
             self._lat,
             self._lon,
-            self._post_code,
+            self._postcode,
         )
 
         def data_schema(
@@ -295,7 +295,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
         client = await self.hass.async_add_executor_job(
             meteoSwissClient,
             "No display name",
-            self._post_code,
+            self._postcode,
         )
 
         (
@@ -400,7 +400,7 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             )
 
         data = {
-            CONF_POSTCODE: self._post_code,
+            CONF_POSTCODE: self._postcode,
             CONF_FORECAST_NAME: self._forecast_name,
             CONF_UPDATE_INTERVAL: self._update_interval,
         }

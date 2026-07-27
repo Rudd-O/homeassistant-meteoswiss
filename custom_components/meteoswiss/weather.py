@@ -117,7 +117,7 @@ class MeteoSwissWeather(
         super().__init__(coordinator)
         self._invalid_legacy_icon_logged = False
         self._attr_unique_id = "weather.%s" % integration_id
-        self._attr_post_code = coordinator.data[CONF_POSTCODE]
+        self._attr_postcode = coordinator.data[CONF_POSTCODE]
         self._attr_station = coordinator.data[CONF_STATION]
         self._attr_weather_station = self._attr_station
         self._attr_weather_station_name = coordinator.data[CONF_REAL_TIME_NAME]
@@ -232,7 +232,7 @@ class MeteoSwissWeather(
     @property
     def attribution(self) -> str:
         a = "Data provided by MeteoSwiss."
-        a += "  Forecasts from postal code %s." % (self._attr_post_code,)
+        a += "  Forecasts from postal code %s." % (self._attr_postcode,)
         if self._attr_weather_station:
             a += "  Real-time weather data from weather station %s (%s)." % (
                 self._attr_weather_station,

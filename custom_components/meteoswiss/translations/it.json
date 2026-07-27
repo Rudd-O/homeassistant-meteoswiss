@@ -8,9 +8,9 @@
             "title": "La stazione meteorologica di MeteoSvizzera sembra essere andata perduta",
             "description": "La stazione meteorologica di MeteoSvizzera utilizzando ({station}) non offre più dati.\\n\\nAttualmente, l'unico riparazione possibile prevede la rimozione e la riacquisizione dell'integrazione di MeteoSvizzera, selezionando una nuova stazione meteorologica in tempo reale.\\n\\nFino a che questa riparazione non sia effettuata, tutti i sensori e le relazioni meteorologici in tempo reale provenienti da questa stazione mostreranno come indisponibili."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MeteoSvizzera sembra non fornire previsioni per il codice di avviamento",
-            "description": "Il codice di avviamento {post_code} sembra non avere alcuna previsione disponibile.\n\nAttualmente, l'unica correzione possibile consiste nell'eliminare e riacquisire l'integrazione MeteoSvizzera, selezionando un nuovo codice di avviamento.\n\nFinché questa correzione non è stata eseguita, la previsione mostrerà come indisponibile."
+            "description": "Il codice di avviamento {postcode} sembra non avere alcuna previsione disponibile.\n\nAttualmente, l'unica correzione possibile consiste nell'eliminare e riacquisire l'integrazione MeteoSvizzera, selezionando un nuovo codice di avviamento.\n\nFinché questa correzione non è stata eseguita, la previsione mostrerà come indisponibile."
         },
         "improperly_configured": {
             "title": "L'integrazione di MeteoSvizzera non è configurata correttamente",

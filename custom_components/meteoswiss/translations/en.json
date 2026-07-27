@@ -8,9 +8,9 @@
             "title": "MeteoSwiss weather station appears to be gone",
             "description": "The real-time weather station MeteoSwiss is using ({station}) is no longer offering data.\n\nCurrently, the only repair possible involves removing and re-adding the MeteoSwiss integration, selecting a new real-time weather station.\n\nUntil this repair is made, all real-time weather sensors and reports coming from this station will show as unavailable."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MeteoSwiss appears not to provide forecasts for postal code",
-            "description": "The postal code {post_code} does not appear to have any forecast available.\n\nCurrently, the only repair possible involves removing and re-adding the MeteoSwiss integration, selecting a new post code.\n\nUntil this repair is made, the forecast will show as unavailable."
+            "description": "The postal code {postcode} does not appear to have any forecast available.\n\nCurrently, the only repair possible involves removing and re-adding the MeteoSwiss integration, selecting a new post code.\n\nUntil this repair is made, the forecast will show as unavailable."
         },
         "improperly_configured": {
             "title": "MeteoSwiss integration improperly configured",

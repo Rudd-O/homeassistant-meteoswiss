@@ -8,9 +8,9 @@
             "title": "La station météo de MétéoSuisse semble avoir disparu",
             "description": "La station météo en temps réel de MétéoSuisse, qui utilise ({station}), n'offre plus de données.\\n\\nActuellement, la seule possibilité de réparation consiste à supprimer et à re-ajouter l'intégration MétéoSuisse, tout en sélectionnant une nouvelle station météo en temps réel.\\n\\nJusqu'à ce que cette réparation soit effectuée, tous les capteurs météo et les rapports provenant de cette station afficheront comme indisponibles."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MétéoSuisse semble ne pas fournir de prévisions pour le code postal",
-            "description": "Le code postal {post_code} ne semble pas avoir de prévision disponible.\n\nActuellement, la seule correction possible consiste à supprimer et à ré-ajouter l'intégration MétéoSuisse, en sélectionnant un nouveau code postal.\n\nJusqu'à ce que cette correction soit effectuée, les prévisions apparaîtront comme indisponibles."
+            "description": "Le code postal {postcode} ne semble pas avoir de prévision disponible.\n\nActuellement, la seule correction possible consiste à supprimer et à ré-ajouter l'intégration MétéoSuisse, en sélectionnant un nouveau code postal.\n\nJusqu'à ce que cette correction soit effectuée, les prévisions apparaîtront comme indisponibles."
         },
         "improperly_configured": {
             "title": "L'intégration de MétéoSuisse est mal configurée",

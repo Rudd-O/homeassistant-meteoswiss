@@ -102,7 +102,7 @@ class MeteoSwissSensor(
             if station_type == StationType.WEATHER
             else CONF_PRECIPITATION_STATION
         ]
-        self._attr_post_code = coordinator.data[CONF_POSTCODE]
+        self._attr_postcode = coordinator.data[CONF_POSTCODE]
 
     @property
     def name(self) -> str:

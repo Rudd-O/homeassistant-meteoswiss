@@ -8,9 +8,9 @@
             "title": "Meteo Stazione meteorologica svizra para dad esser sparida",
             "description": "La staziun da meteorologia a temp real MeteoSvizra nizzegia ({station}) na porscha naginas datas pli.\n\nCitads Actualmain cumpiglia la suletta pussaivladad da reparar l'integraziun da MeteoSvizra, tschernind ina nova staziun da meteorologia per propi.\n\n Fin che questa reparatura è fatga vegnan a mussar tut ils sensurs da l'aura reals e tut las reportaschas che derivan da questa staziun sco betg disponiblas."
         },
-        "post_code_no_data": {
+        "postcode_no_data": {
             "title": "MeteoSwiss appears not to provide forecasts for postal code",
-            "description": "The postal code {post_code} does not appear to have any forecast available.\n\nCurrently, the only repair possible involves removing and re-adding the MeteoSwiss integration, selecting a new post code.\n\nUntil this repair is made, the forecast will show as unavailable."
+            "description": "The postal code {postcode} does not appear to have any forecast available.\n\nCurrently, the only repair possible involves removing and re-adding the MeteoSwiss integration, selecting a new post code.\n\nUntil this repair is made, the forecast will show as unavailable."
         },
         "improperly_configured": {
             "title": "Meteo Integraziun svizra da configuraziun sbagliada",
