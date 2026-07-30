@@ -157,6 +157,7 @@ class MeteoSwissWeather(
         """Handle data update."""
         data = self.coordinator.data
         self.__set_data(data)
+        self.async_write_ha_state()
 
     @property
     def native_temperature(self) -> float | None:
