@@ -12,7 +12,8 @@
     "quality_scale": "silver",
     "requirements": [
         "hamsclientfork>=0.2.20",
-        "geopy>=2.0"
+        "geopy>=2.0",
+        "pyfive>=1.0"
     ],
     "version": "1.4.0"
 }

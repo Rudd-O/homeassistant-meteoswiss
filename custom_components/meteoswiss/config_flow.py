@@ -403,6 +403,8 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             CONF_POSTCODE: self._postcode,
             CONF_FORECAST_NAME: self._forecast_name,
             CONF_UPDATE_INTERVAL: self._update_interval,
+            CONF_LAT: self._lat,
+            CONF_LON: self._lon,
         }
         if weather_station and real_time_weather_name:
             data.update(
