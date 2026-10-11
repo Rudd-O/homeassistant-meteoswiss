@@ -21,6 +21,8 @@ from homeassistant.helpers.update_coordinator import (
 
 from custom_components.meteoswiss.const import (
     CONF_FORECAST_NAME,
+    CONF_LAT,
+    CONF_LON,
     CONF_POSTCODE,
     CONF_PRECIPITATION_STATION,
     CONF_REAL_TIME_NAME,
@@ -30,6 +32,7 @@ from custom_components.meteoswiss.const import (
     DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
 )
+from custom_components.meteoswiss.radar import MeteoSwissRadarCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 PLATFORMS = [Platform.SENSOR, Platform.WEATHER]
@@ -101,6 +104,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
     await coordinator.async_config_entry_first_refresh()
 
+    # Entries created before the radar sensor existed did not store the
+    # location they were set up for; the home location stands in for it.
+    coordinator.radar = MeteoSwissRadarCoordinator(
+        hass,
+        entry.data.get(CONF_LAT, hass.config.latitude),
+        entry.data.get(CONF_LON, hass.config.longitude),
+    )
+    # Not first_refresh: the radar being late must not hold up the forecast.
+    await coordinator.radar.async_refresh()
+
     entry.async_on_unload(entry.add_update_listener(update_listener))
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
@@ -147,6 +160,7 @@ class MeteoSwissDataUpdateCoordinator(DataUpdateCoordinator[MeteoSwissClientResu
     """Class to manage fetching MeteoSwiss data API."""
 
     data: MeteoSwissClientResult
+    radar: MeteoSwissRadarCoordinator
 
     def __init__(
         self,
