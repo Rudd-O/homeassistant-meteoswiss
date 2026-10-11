@@ -175,6 +175,29 @@ def find_in_item(
     return found[-1][1], found[-1][2]
 
 
+def newest_variant(
+    product: RadarProduct,
+    slot: datetime.datetime,
+    assets: dict[str, typing.Any],
+) -> str | None:
+    """Return the variant of the newest image of product in a daily item.
+
+    A variant holds for hours, so it is the best guess for an image that
+    is not out yet.
+    """
+    # Every stem of a product has the same length; only its prefix is fixed.
+    length = len(stem_of(product, slot))
+    prefix = product.stem.split("{", 1)[0]
+    names = sorted(
+        (asset.get("created", ""), name)
+        for name, asset in assets.items()
+        if name.startswith(prefix) and name.endswith(product.ext)
+    )
+    if not names:
+        return None
+    return names[-1][1][length : -len(product.ext)]
+
+
 def read_pixel(content: bytes, lat: float, lon: float) -> float | None:
     """Return the value at lat/lon from a radar image.
 
@@ -291,6 +314,14 @@ class MeteoSwissRadarCoordinator(DataUpdateCoordinator[dict[str, RadarReading]])
         assets = await self._item_assets(product.collection, day_of(slot))
         found = find_in_item(product, slot, assets)
         if found is None:
+            # Late as well as renamed: a variant that comes with a longer
+            # delay can keep every image out of the index when it is read.
+            # Learn the name from the newest image instead, so the next
+            # poll asks for the right file.
+            variant = newest_variant(product, slot, assets)
+            if variant is not None and variant != self._variants[key]:
+                _LOGGER.debug("Radar %s is now published as variant %s", key, variant)
+                self._variants[key] = variant
             return None
         variant, href = found
         _LOGGER.debug("Radar %s %s is published as variant %s", key, slot, variant)
