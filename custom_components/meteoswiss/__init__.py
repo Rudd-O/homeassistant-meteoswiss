@@ -30,6 +30,7 @@ from custom_components.meteoswiss.const import (
     DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
 )
+from custom_components.meteoswiss.forecast_fix import patch_client
 
 _LOGGER = logging.getLogger(__name__)
 PLATFORMS = [Platform.SENSOR, Platform.WEATHER]
@@ -211,6 +212,7 @@ class MeteoSwissDataUpdateCoordinator(DataUpdateCoordinator[MeteoSwissClientResu
             weather_station if weather_station else "NO STATION",
             precipitation_station if precipitation_station else "NO STATION",
         )
+        patch_client(self.client)
         _LOGGER.debug("Client obtained")
 
         super().__init__(
