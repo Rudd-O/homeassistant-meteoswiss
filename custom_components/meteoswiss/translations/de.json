@@ -20,7 +20,8 @@
     "config": {
         "abort": {
             "already_configured": "Bereits konfiguriert",
-            "unknown": "Unbekannter Fehler: Bitte versuche es später erneut"
+            "unknown": "Unbekannter Fehler: Bitte versuche es später erneut",
+            "reconfigure_successful": "Neu konfiguriert"
         },
         "error": {
             "cannot_query_address": "OpenStreetMap konnte die Adresse für deinen Standort nicht bestimmen; bitte gib die Informationen manuell ein",

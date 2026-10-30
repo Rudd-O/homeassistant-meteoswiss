@@ -20,7 +20,8 @@
     "config": {
         "abort": {
             "already_configured": "Already configured",
-            "unknown": "Unknown error: please retry later"
+            "unknown": "Unknown error: please retry later",
+            "reconfigure_successful": "Reconfiguration successful"
         },
         "error": {
             "cannot_query_address": "OpenStreetMap refused to guess the address for your location; please enter the information manually",
