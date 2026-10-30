@@ -20,7 +20,8 @@
     "config": {
         "abort": {
             "already_configured": "Byen er allerede konfigurert",
-            "unknown": "Ukjent feil: prøv på nytt senere"
+            "unknown": "Ukjent feil: prøv på nytt senere",
+            "reconfigure_successful": "Rekonfigurering fullført"
         },
         "error": {
             "cannot_query_address": "OpenStreetMap ne ønsket å gueß adresse for din lokasjon; skriv inn informasjonen selv",

@@ -429,10 +429,21 @@ class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:i
             "step user three: finishing with %s",
             data,
         )
+        if self.source == config_entries.SOURCE_RECONFIGURE:
+            # Entities are keyed by entry_id, so they survive the new location.
+            return self.async_update_reload_and_abort(
+                self._get_reconfigure_entry(),
+                title=title,
+                data=data,
+            )
         return self.async_create_entry(
             title=title,
             data=data,
         )
+
+    async def async_step_reconfigure(self, user_input=None):
+        """Change location, postcode or stations of an existing entry."""
+        return await self.async_step_user(user_input)
 
     async def async_step_import(self, import_config: dict[str, Any]):
         """Import a config entry."""
