@@ -37,7 +37,6 @@ NO_PRECIPITATION_STATION = "No real-time precipitation station"
 
 class MeteoSwissFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type:ignore
     VERSION = 1
-    CONNECTION_CLASS = config_entries.CONN_CLASS_LOCAL_POLL
 
     def __init__(self):
         """Init FlowHandler."""
